@@ -1,0 +1,60 @@
+
+.full-page {
+  display: flex;
+  flex-direction: row;
+
+  & .side-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 15vw;
+  }
+
+  & .container {
+    height: 100vh;
+    width: 100vw;
+    margin-left: 15vw;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    & .up-bar {
+      flex: 0;
+      height: 10vh;
+      top: 0;
+      left: 0;
+    }
+
+    & .content {
+      align-self: center;
+      flex: auto;
+      //display: flex;
+      //flex-direction: column;
+      //flex-flow: column;
+      overflow-y: auto;
+      //overflow-x: hidden;
+      scrollbar-width: thin;
+      scrollbar-color: grey lightgrey;
+      width: 85vw;
+      background-color: chocolate;
+
+      & :nth-child(odd){
+        flex: 1;
+        margin-left: 20vw;
+        //float: right;
+      }
+
+      & :nth-child(2n) {
+        flex:1;
+        margin-left: 10vw;
+        //float: left;
+      }
+
+
+    }
+
+    & .full-input{
+      flex: 0;
+    }
+  }
+}

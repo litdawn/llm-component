@@ -1,0 +1,3 @@
+function ChatShow_typewriter() {
+    
+}

@@ -1,20 +1,25 @@
 .side-bar{
-  position: sticky;
+  color: white;
   font-size : 30px;
-  width: 20vw;
+  width: 15vw;
   height: 100vh;
-  background-color: #61dafb;
+  background-color: darkslategray;
   display: flex;
   flex-direction: column;
 
-  .start{
+  & .start{
     margin-top: 2vh;
     flex: 0 1 auto;
     font-size: 16px;
+    border-style: solid;
+    border-color: white;
+    border-width: 0.1vh;
   }
-  .chat-list {
+
+  & .chat-list {
     margin-top: 20vh;
-    .chat-item {
+
+    & .chat-item {
       color: aliceblue;
       background-color: #282c34;
       border-style: solid;
