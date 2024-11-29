@@ -1,24 +1,10 @@
-const conversations =
-    {
-        "gdugde": {
-            theme: "",
-            chat_list: [
-                {
-                    type: "user",//assistant,
-                    id: "",//
-                    content: ""
-                }
-            ]
-        }
-    }
-
-
 export const reducer = (state, action) => {
+    let new_state = ""
     switch (action.type) {
         case 'new_chat': {
             const chat_id = action.payload.chat_id;
             add_new_chat(chat_id)
-            return {
+            new_state = {
                 ...state,
                 conversations: {
                     ...state.conversations,
@@ -29,47 +15,60 @@ export const reducer = (state, action) => {
                     }
                 }
             }
+            break;
         }
         case 'new_ask': {
-            const new_state = JSON.parse(JSON.stringify(state))
-            new_state.conversations[new_state.active].chat_list.push({
+            new_state = JSON.parse(JSON.stringify(state))
+            new_state["conversations"][state.active].chat_list.push({
                 type:"user",
                 id:action.payload.ask_id,
                 content:action.payload.content
             })
-            let chat_theme = new_state.conversations[new_state.active].theme;
+            let chat_theme = new_state["conversations"][state.active].theme;
             if (action.payload.ask_id == 1) {
                 chat_theme = action.payload.content;
             }
-            new_state.conversations[new_state.active].theme = chat_theme;
-            return new_state
+            new_state["conversations"][state.active].theme = chat_theme;
+            break;
         }
         case 'new_ans': {
-            const new_state = JSON.parse(JSON.stringify(state))
-            new_state.conversations[state.active].chat_list.push({
+            new_state = JSON.parse(JSON.stringify(state))
+            new_state["conversations"][state.active].chat_list.push({
                 type:"assistant",
                 id:action.payload.ans_id,
                 content:action.payload.content
             })
-            return new_state
+            break;
         }
         case 'add_content':{
-            const new_state = JSON.parse(JSON.stringify(state));
-            const chat_list = new_state.conversations[state.active].chat_list;
+            new_state = JSON.parse(JSON.stringify(state));
+            const chat_list = new_state["conversations"][state.active].chat_list;
             let is_contained = false;
             for(const chat of chat_list){
                 if(action.payload.ans_id == chat.id){
-                   chat.content.concat(action.payload.content);
+                   chat.content = chat.content.concat(action.payload.content);
                    is_contained = true;
                    break;
                 }
             }
-
-            return new_state
+            if(!is_contained){
+                new_state["conversations"][state.active].chat_list.push({
+                    type:"assistant",
+                    id:action.payload.ans_id,
+                    content:action.payload.content
+                })
+            }
+            break;
+        }
+        case 'init':{
+            new_state = action.payload.state;
+            break;
         }
         default:
             return state
     }
+    new_state["timestamp"] = Date.now();
+    return new_state;
 }
 
 const add_new_chat = (chat_id) => {

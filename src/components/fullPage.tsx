@@ -15,12 +15,8 @@ interface FullPageProps{
     messages: Array<Object>
 }
 const FullPage:React.FC = (props:FullPageProps) => {
-    console.log("fullpages", props.messages)
-    // const messages = [{
-    //     type:"user",
-    //     id:"",
-    //     content:""
-    // }]
+
+    // console.log("fullpages", props.messages)
     return (
         <>
             <div className={"full-page"}>
@@ -35,7 +31,7 @@ const FullPage:React.FC = (props:FullPageProps) => {
 
                     <div className={"content"}>
                         {
-                            props.messages.map((value, index, array) => {
+                            props.messages.map((value) => {
                                 return (
                                     <div key={value["id"]} className={"chat-show"}>
                                         <ChatShow content={value["content"]}></ChatShow>

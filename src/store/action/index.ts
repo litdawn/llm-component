@@ -35,5 +35,14 @@ export const ADD_CONTENT = (ans_id, content) => {
       content
     }
   }
+}
+
+export const INIT = (state)=>{
+  return{
+    type:"init",
+    payload:{
+      state
+    }
+  }
 
 }
