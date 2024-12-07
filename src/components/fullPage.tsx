@@ -34,7 +34,7 @@ const FullPage:React.FC = (props:FullPageProps) => {
                             props.messages.map((value) => {
                                 return (
                                     <div key={value["id"]} className={"chat-show"}>
-                                        <ChatShow content={value["content"]}></ChatShow>
+                                        <ChatShow content={value["content"]} type={value["type"]}></ChatShow>
                                     </div>
                                 )
                             })

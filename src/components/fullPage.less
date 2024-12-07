@@ -25,7 +25,7 @@
       left: 0;
     }
 
-    & .content {
+    &>.content {
       align-self: center;
       flex: auto;
       //display: flex;
@@ -38,13 +38,13 @@
       width: 85vw;
       background-color: chocolate;
 
-      & :nth-child(odd){
+      &>:nth-child(odd){
         flex: 1;
         margin-left: 20vw;
         //float: right;
       }
 
-      & :nth-child(2n) {
+      &>:nth-child(2n) {
         flex:1;
         margin-left: 10vw;
         //float: left;

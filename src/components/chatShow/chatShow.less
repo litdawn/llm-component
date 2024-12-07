@@ -1,13 +1,26 @@
 #chat-show{
-
   height: auto;
   //width: auto;
-  width: 50vw;
+  width: 40vw;
   //margin-top: 10px;
-  margin:2vh;
-  padding: 2vh;
+  margin:3vh;
+  //padding: 2vh;
+  padding-left: 2vh;
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+  padding-right: 1vh;
   background-color: bisque;
-  & .content{
-
+  text-align: left;
+  &>.content{
+    //color: #61dafb;
+  }
+  &>.tool-bar{
+    float: right;
+    color: white;
+    display: none;
+  }
+  &:hover>.tool-bar{
+    display: block;
   }
 }
+
