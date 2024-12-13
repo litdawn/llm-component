@@ -477,6 +477,20 @@ module.exports = function (webpackEnv) {
                 inputSourceMap: shouldUseSourceMap,
               },
             },
+            {
+              test: /\.worker\.js$/,
+              use: [
+                {
+                  loader: 'worker-loader',
+                  options: {
+                    inline: 'fallback',
+                  },
+                },
+                {
+                  loader: 'js-loader',
+                },
+              ],
+            },
             // "postcss" loader applies autoprefixer to our CSS.
             // "css" loader resolves paths in CSS and adds assets as dependencies.
             // "style" loader turns CSS into JS modules that inject <style> tags.
@@ -597,6 +611,7 @@ module.exports = function (webpackEnv) {
               exclude: [/^$/, /\.(js|mjs|jsx|ts|tsx)$/, /\.html$/, /\.json$/],
               type: 'asset/resource',
             },
+
             // ** STOP ** Are you adding a new loader?
             // Make sure to add the new loader(s) before the "file" loader.
           ],

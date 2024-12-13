@@ -1,16 +1,14 @@
 // @ts-ignore
 import React from "react";
 import "./upBar.less"
-// @ts-ignore
-import {store} from "../../store/index.ts";
 import { Button } from "antd";
 import {DownOutlined} from "@ant-design/icons"
 import {connect} from "react-redux";
 /*
-  显示字符的
+  上方的状态栏
  */
 interface UpBarProps{
-    theme
+    theme: string
 }
 const UpBar:React.FC = (props:UpBarProps)=>{
 
@@ -20,7 +18,7 @@ const UpBar:React.FC = (props:UpBarProps)=>{
                 <Button
                     type="text"
                     block
-                    style={{color:"white", fontSize:"22px"}}
+                    style={{color:"white", fontSize:"22px",marginTop:"1vh"}}
                     icon={<DownOutlined />}>
                     @{props.theme}
                 </Button>

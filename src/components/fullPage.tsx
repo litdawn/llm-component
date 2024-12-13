@@ -19,7 +19,7 @@ const FullPage:React.FC = (props:FullPageProps) => {
     // console.log("fullpages", props.messages)
     return (
         <>
-            <div className={"full-page"}>
+            <div id={"full-page"}>
                 <div className={"side-bar"}>
                     <SideBar></SideBar>
                 </div>
