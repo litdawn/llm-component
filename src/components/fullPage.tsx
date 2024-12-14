@@ -9,6 +9,7 @@ import UpBar from "./upBar/upBar.tsx";
 import ChatShow from "./chatShow/chatShow.tsx";
 // @ts-ignore
 import FullInput from "./input/fullInput.tsx";
+
 import {connect} from "react-redux";
 
 

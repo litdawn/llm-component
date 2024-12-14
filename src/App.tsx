@@ -5,8 +5,8 @@ import './App.css';
 import FullPage from "./components/fullPage.tsx";
 //@ts-ignore
 import store from "./store/index.ts";
-//@ts-ignore
-import {INIT} from "./store/action/index.ts";
+// @ts-ignore
+import ErrorBoundary from "./components/errorBoundary.tsx";
 
 function App() {
 
@@ -26,13 +26,17 @@ function App() {
 
     // const store = store
     return (
+        <>
 
-        <div className="App" style={{fontFamily: "汇文明朝体"}}>
-            {/*<header className="Ap-header">*/}
-            {/*</header>*/}
-            <FullPage></FullPage>
-
-        </div>
+            <div className="App" style={{fontFamily: "汇文明朝体"}}>
+                {/*<header className="Ap-header">*/}
+                {/*</header>*/}
+                {/*// @ts-ignore*/}
+                <ErrorBoundary>
+                <FullPage></FullPage>
+                </ErrorBoundary>
+            </div>
+        </>
 
     );
 }
