@@ -11,10 +11,12 @@ import ChatShow from "./chatShow/chatShow.tsx";
 import FullInput from "./input/fullInput.tsx";
 import {connect} from "react-redux";
 
-interface FullPageProps{
+
+interface FullPageProps {
     messages: Array<Object>
 }
-const FullPage:React.FC = (props:FullPageProps) => {
+
+const FullPage: React.FC = (props: FullPageProps) => {
 
     // console.log("fullpages", props.messages)
     return (
@@ -50,7 +52,7 @@ const FullPage:React.FC = (props:FullPageProps) => {
     )
 }
 
-const state2Props = (state)=>{
+const state2Props = (state) => {
     return {messages: state.conversations[state.active]["chat_list"]}
 }
 

@@ -1,5 +1,19 @@
-#up-bar{
+#up-bar {
   background-color: darkslategray;
   width: 85vw;
   height: 5vh;
+  display: flex;
+  //justify-content: space-between;
+
+  & > .container {
+    //flex: 1 1 auto;
+    margin-right: 20vw;
+  }
+
+  &>.online{
+    //flex: 0 0 auto;
+    font-size: 13px;
+    color: white;
+    float: right;
+  }
 }

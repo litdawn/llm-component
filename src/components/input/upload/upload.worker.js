@@ -5,7 +5,7 @@ const uploadChunks = async (chunks) => {
         formData.append("fileChunk", chunks[i]);
 
         // 发送切片上传请求
-        await fetch("/update", {
+        await fetch("http://localhost:2000/update", {
             method: "POST",
             body: formData,
         });
@@ -37,3 +37,19 @@ self.addEventListener("message", async (event) => {
     // 通知完成
     postMessage({ type: "uploadComplete" });
 });
+
+function getFileMD5(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = e => {
+      const buffer = new Uint8Array(e.target.result);
+      crypto.subtle.digest('SHA-256', buffer).then(hashBuffer => {
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        resolve(hashHex);
+      }).catch(reject);
+    };
+    reader.onerror = reject;
+    reader.readAsArrayBuffer(file);
+  });
+}
