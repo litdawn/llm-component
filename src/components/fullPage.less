@@ -30,14 +30,32 @@
       //display: flex;
       //flex-direction: column;
       //flex-flow: column;
-      overflow-y: auto;
+      overflow-y: scroll;
       //overflow-x: hidden;
       scrollbar-width: thin;
       scrollbar-color: grey lightgrey;
       width: 85vw;
       background-color: chocolate;
 
-      &>:nth-child(odd){
+      //&>:nth-child(odd){
+      //  flex: 1;
+      //  margin-left: 20vw;
+      //  & #chat-show{
+      //    padding-bottom: 1vh;
+      //  }
+      //  //float: right;
+      //}
+      //
+      //&>:nth-child(2n) {
+      //  flex:1;
+      //  margin-left: 10vw;
+      //  & #chat-show{
+      //    padding-bottom: 4vh;
+      //  }
+      //  //padding-bottom: 4vh;
+      //  //float: left;
+      //}
+      &>.user{
         flex: 1;
         margin-left: 20vw;
         & #chat-show{
@@ -46,7 +64,7 @@
         //float: right;
       }
 
-      &>:nth-child(2n) {
+      &>.assistant{
         flex:1;
         margin-left: 10vw;
         & #chat-show{
@@ -56,11 +74,16 @@
         //float: left;
       }
 
-
     }
 
     & .full-input{
       flex: 0;
     }
+  }
+  &>.float{
+    position: absolute;
+    //visibility: hidden;
+    bottom: 3vh;
+    left: 50vw;
   }
 }

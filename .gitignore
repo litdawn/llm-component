@@ -5,6 +5,8 @@
 /.pnp
 .pnp.js
 
+./llm-backend/node_modules
+
 # testing
 /coverage
 

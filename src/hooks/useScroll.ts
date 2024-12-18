@@ -1,18 +1,19 @@
 import { useState, useEffect } from 'react';
 
 // 获取横向，纵向滚动条位置
-const getPosition = (doc = document) => {
+const getPosition = (ref) => {
     return {
-        x: doc.body.scrollLeft,
-        y: doc.body.scrollTop,
+        x: ref.current.scrollLeft,
+        y: ref.current.scrollTop,
     };
 };
-const useScroll = () => {
+const useScroll = (ref) => {
     // 定一个 position 这个 state 保存滚动条位置
-    const [position, setPosition] = useState(getPosition());
+    const [position, setPosition] = useState([0,0]);
     useEffect(() => {
         const handler = () => {
-            setPosition(getPosition(document));
+            //@ts-ignore
+            setPosition(getPosition(ref));
         };
         // 监听 scroll 事件，更新滚动条位置
         document.addEventListener("scroll", handler);

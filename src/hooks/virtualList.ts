@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import {useEffect, useState} from 'react';
 
 /**
  * useVirtual：一个虚拟滚动的 hook，用于优化长列表的渲染性能。
@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
  * @param {boolean} isFullScreen 是否全屏显示
  * @returns {Array} 显示在视图中的列表数据和 padding 样式
  */
-export const useVirtual = (listRef, list, isFullScreen) => {
+export const useVirtual = (listRef, list, stick2end=false) => {
     const origin = list;
     let viewHeight = null;
     let itemHeight = 0;
@@ -29,7 +29,14 @@ export const useVirtual = (listRef, list, isFullScreen) => {
 
     useEffect(() => {
         initData(listRef.current);
-        update();
+        const stick2end = listRef.current.getAttribute("stick2end")==="true";
+        if(!stick2end) {
+            update();
+        }else{
+            toEnd();
+            listRef.current.setAttribute("stick2end","false");
+        }
+
     }, [startIndex]);
 
     function init(ref) {
@@ -39,15 +46,15 @@ export const useVirtual = (listRef, list, isFullScreen) => {
     }
 
     function initData(dom) {
-        const target = isFullScreen ? document.documentElement : dom;
-        viewHeight = isFullScreen ? target.offsetHeight : target.parentNode.offsetHeight;
-        itemHeight = target.getElementsByClassName('virtual-item')[0].offsetHeight;
+        const target = dom;
+        viewHeight = target.parentNode.offsetHeight;
+        // itemHeight = target.getElementsByClassName('virtual-item')[0].offsetHeight;
+        itemHeight = 100;
         dur = Math.floor(viewHeight / itemHeight);
     }
 
     function eventBind(dom) {
-        const eventTarget = isFullScreen ? window : dom.parentNode;
-        eventTarget.addEventListener('scroll', handleScroll, false);
+        dom.addEventListener('scroll', handleScroll, false);
     }
 
     function render(startIndex, endIndex) {
@@ -57,11 +64,38 @@ export const useVirtual = (listRef, list, isFullScreen) => {
 
     function handleScroll(e) {
         e.stopPropagation();
-        const target = isFullScreen ? document.documentElement : listRef.current.parentNode;
+        // let scrollTop = e.target.scrollTop;
+        // let clientHeight = e.target.clientHeight;
+        // let scrollHeight = e.target.scrollHeight;
+        //
+        // // 打印数值
+        // console.table([
+        //     {
+        //         label: "距顶部",
+        //         value: scrollTop,
+        //     },
+        //     {
+        //         label: "可视区高度",
+        //         value: clientHeight,
+        //     },
+        //     {
+        //         label: "滚动条总高度",
+        //         value: scrollHeight,
+        //     },
+        //     {
+        //         label: "距顶部 + 可视区高度",
+        //         value: scrollTop + clientHeight,
+        //     }, {
+        //         label: "startIndex",
+        //         value: Math.floor(e.target.scrollTop / itemHeight)
+        //     },
+        // ]);
+        const target = e.target;
         setStartIndex(() => Math.floor(target.scrollTop / itemHeight));
     }
 
     function update() {
+        if (startIndex >= list.length - dur - 1) return;
         if (startIndex === endIndex) return;
         setEndIndex(() => startIndex + dur);
         render(startIndex, endIndex);
@@ -71,6 +105,12 @@ export const useVirtual = (listRef, list, isFullScreen) => {
                 paddingBottom: ((origin.length - endIndex) * itemHeight) / rootFontSize,
             };
         });
+    }
+
+    function toEnd() {
+        setEndIndex(() => list.length - 1);
+        setStartIndex(() => list.length - 1 - dur)
+        render(startIndex, endIndex);
     }
 
     return [viewList, padding];
