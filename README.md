@@ -1,6 +1,6 @@
-# LLM对话组件
+# LLM对话
 
-仿照claude/chat-gpt/实现的对话组件，使用coze接口
+使用coze接口
 1. fetch原生api做流式传输，实现打字机效果
 2. react-syntax-markdown与react-syntax-highlight组件实现富文本解析与展示
 3. antd组件
